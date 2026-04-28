@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jani Web Voice Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="grid" aria-hidden="true"></div>
+  <div class="radial-aura" aria-hidden="true"></div>
+
+  <main class="shell" aria-label="Jani voice assistant">
+    <section class="hud-panel chat-panel" aria-label="Chat history">
+      <div class="panel-header">
+        <span>Conversation</span>
+        <span class="panel-code">JANI-01</span>
+      </div>
+      <div id="chatLog" class="chat-log" aria-live="polite"></div>
+      <div class="command-hints" aria-label="Example voice commands">
+        <button type="button" data-command="jani open youtube">Jani open YouTube</button>
+        <button type="button" data-command="jani search google for iron man hud">Jani search Google</button>
+      </div>
+    </section>
+
+    <section class="core-stage" aria-label="Voice controls">
+      <div class="brand-lockup" aria-hidden="true">
+        <span>JANI</span>
+        <strong>Browser Voice Assistant</strong>
+      </div>
+
+      <div id="reactor" class="reactor" aria-hidden="true">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-mid"></div>
+        <div class="ring ring-inner"></div>
+        <div class="core-glow"></div>
+        <div class="radial-ticks"></div>
+      </div>
+
+      <button id="micButton" class="mic-button" type="button" aria-label="Start listening">
+        <span class="mic-icon" aria-hidden="true"></span>
+      </button>
+
+      <div id="waveform" class="waveform" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="core-caption" aria-live="polite">
+        <span id="wakeBadge">Wake word: Jani</span>
+        <strong id="coreStatus">Tap mic to arm wake mode</strong>
+      </div>
+    </section>
+
+    <section class="hud-panel status-panel" aria-label="Assistant status">
+      <div class="panel-header">
+        <span>System</span>
+        <span id="clock" class="panel-code">--:--</span>
+      </div>
+      <div class="status-readout">
+        <span class="label">Status</span>
+        <strong id="statusText">Idle</strong>
+      </div>
+      <div class="status-readout">
+        <span class="label">Wake</span>
+        <strong id="wakeStatusText">Off</strong>
+      </div>
+      <div class="status-readout">
+        <span class="label">Signal</span>
+        <strong id="signalText">Standby</strong>
+      </div>
+      <div class="status-readout">
+        <span class="label">Mic</span>
+        <strong id="micStatusText">Checking</strong>
+      </div>
+      <div class="meter" aria-label="Microphone input level">
+        <span class="label">Input Level</span>
+        <div class="meter-track">
+          <div id="micLevelBar" class="meter-fill"></div>
+        </div>
+      </div>
+      <label class="control-label" for="languageSelect">Voice Input</label>
+      <select id="languageSelect" class="hud-select" aria-label="Voice input language">
+        <option value="en-US">English US</option>
+        <option value="en-GB">English UK</option>
+        <option value="ur-PK">Urdu Pakistan</option>
+        <option value="hi-IN">Hindi India</option>
+      </select>
+      <p id="transcriptText" class="transcript">Awaiting voice command.</p>
+      <a id="actionLink" class="action-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Open requested tab</a>
+      <form id="textCommandForm" class="command-form">
+        <input id="textCommandInput" type="text" autocomplete="off" placeholder="Type command if mic is blocked">
+        <button type="submit">Send</button>
+      </form>
+      <button id="stopSpeechButton" class="quiet-button" type="button">Stop Voice</button>
+    </section>
+  </main>
+
+  <audio id="startSound" src="assets/sounds/start.wav" preload="auto"></audio>
+  <audio id="stopSound" src="assets/sounds/stop.wav" preload="auto"></audio>
+  <audio id="responseSound" src="assets/sounds/response.wav" preload="auto"></audio>
+
+  <script src="js/ui.js" defer></script>
+  <script src="js/commands.js" defer></script>
+  <script src="js/speech.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
